@@ -1,0 +1,25 @@
+# Local Windows images and deployment/build artifacts
+/*.iso
+/build/
+/downloads/
+/output/
+
+# Next.js and Node.js local files
+/web/node_modules/
+/web/.next/
+/web/out/
+/web/tsconfig.tsbuildinfo
+/web/npm-debug.log*
+/web/yarn-debug.log*
+/web/yarn-error.log*
+/web/.vercel/
+
+# Local environment and editor files
+*.local
+*.log
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Keep the distributable package intentionally tracked:
+# /web/public/downloads/purge-windows.zip
