@@ -1,0 +1,69 @@
+{
+  "Metadata": {
+    "title": "PURGE — Reset a Windows PC",
+    "description": "A short, guided and readable Windows journey to clean up a computer and return it to the first-time setup screen."
+  },
+  "Navigation": {
+    "primary": "Main navigation",
+    "home": "PURGE, home",
+    "use": "Use it",
+    "after": "After",
+    "download": "Download",
+    "start": "Get started",
+    "language": "Language"
+  },
+  "Hero": {
+    "titleLine1": "Clean a Windows PC.",
+    "titleLine2": "Reset it.",
+    "lede": "A short journey to check, confirm and reset Windows.",
+    "download": "Download PURGE",
+    "steps": "See the steps",
+    "preview": "PURGE journey preview",
+    "machine": "MACHINE",
+    "machineState": "In progress",
+    "windows": "Windows",
+    "adminRights": "Admin rights",
+    "reset": "Reset",
+    "initialScreen": "First-time setup",
+    "report": "report.json"
+  },
+  "Use": {
+    "titleLine1": "Run PURGE.",
+    "titleLine2": "Reset Windows.",
+    "summary": "Four actions to take, in order.",
+    "stepDownload": "Download",
+    "stepDownloadText": "Download the package and extract it to a folder.",
+    "stepLaunch": "Launch",
+    "stepLaunchText": "Open Purge.cmd, then accept the UAC prompt.",
+    "stepConfirm": "Confirm",
+    "stepConfirmText": "In the window, type exactly NETTOYER.",
+    "stepReset": "Reset",
+    "stepResetText": "In Windows, choose Reset this PC, then Remove everything.",
+    "consoleLabel": "Example command and Windows screen",
+    "checking": "Checking...",
+    "admin": "Admin rights",
+    "action": "ACTION",
+    "type": "Type:",
+    "recovery": "WINDOWS / RECOVERY",
+    "resetThisPc": "Reset this PC",
+    "removeEverything": "Remove everything",
+    "cleanData": "Enable data cleaning if Windows offers it."
+  },
+  "After": {
+    "titleLine1": "What happens",
+    "titleLine2": "after.",
+    "summary": "PURGE stops before the next user’s setup.",
+    "resetPending": "Confirmation received. Windows opens Recovery.",
+    "restart": "Windows applies the reset and restarts automatically.",
+    "initialScreen": "The computer returns to the first Windows setup."
+  },
+  "Download": {
+    "title": "Ready to run?",
+    "description": "Download, extract the package, then open",
+    "button": "Download"
+  },
+  "Footer": {
+    "summary": "Windows · reset · local report",
+    "backToTop": "Back to top"
+  }
+}

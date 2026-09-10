@@ -1,0 +1,69 @@
+{
+  "Metadata": {
+    "title": "PURGE — Réinitialiser un PC Windows",
+    "description": "Le parcours Windows court, guidé et lisible pour nettoyer un ordinateur et revenir à l’écran de première configuration."
+  },
+  "Navigation": {
+    "primary": "Navigation principale",
+    "home": "PURGE, accueil",
+    "use": "Utiliser",
+    "after": "Après",
+    "download": "Télécharger",
+    "start": "Commencer",
+    "language": "Langue"
+  },
+  "Hero": {
+    "titleLine1": "Nettoyez un PC Windows.",
+    "titleLine2": "Remettez-le à zéro.",
+    "lede": "Un parcours court pour vérifier, confirmer et réinitialiser Windows.",
+    "download": "Télécharger PURGE",
+    "steps": "Voir les étapes",
+    "preview": "Aperçu du parcours PURGE",
+    "machine": "MACHINE",
+    "machineState": "En cours",
+    "windows": "Windows",
+    "adminRights": "Droits admin",
+    "reset": "Réinitialisation",
+    "initialScreen": "Écran initial",
+    "report": "rapport.json"
+  },
+  "Use": {
+    "titleLine1": "Lancer PURGE.",
+    "titleLine2": "Réinitialiser Windows.",
+    "summary": "Les quatre actions à faire, dans l’ordre.",
+    "stepDownload": "Télécharger",
+    "stepDownloadText": "Téléchargez le paquet et extrayez-le dans un dossier.",
+    "stepLaunch": "Lancer",
+    "stepLaunchText": "Ouvrez Purge.cmd, puis acceptez la demande UAC.",
+    "stepConfirm": "Confirmer",
+    "stepConfirmText": "Dans la fenêtre, écrivez exactement NETTOYER.",
+    "stepReset": "Réinitialiser",
+    "stepResetText": "Dans Windows, choisissez Réinitialiser ce PC puis Supprimer tout.",
+    "consoleLabel": "Exemple de commande et d’écran Windows",
+    "checking": "Vérification...",
+    "admin": "Droits admin",
+    "action": "ACTION",
+    "type": "Écrire :",
+    "recovery": "WINDOWS / RÉCUPÉRATION",
+    "resetThisPc": "Réinitialiser ce PC",
+    "removeEverything": "Supprimer tout",
+    "cleanData": "Activez le nettoyage des données si Windows le propose."
+  },
+  "After": {
+    "titleLine1": "Ce qui se passe",
+    "titleLine2": "après.",
+    "summary": "PURGE s’arrête avant la configuration du prochain utilisateur.",
+    "resetPending": "La confirmation est reçue. Windows ouvre Récupération.",
+    "restart": "Windows applique la remise à zéro et redémarre automatiquement.",
+    "initialScreen": "L’ordinateur revient à la première configuration Windows."
+  },
+  "Download": {
+    "title": "Prêt à lancer ?",
+    "description": "Téléchargez, extrayez le paquet, puis ouvrez",
+    "button": "Télécharger"
+  },
+  "Footer": {
+    "summary": "Windows · remise à zéro · rapport local",
+    "backToTop": "Retour en haut"
+  }
+}
