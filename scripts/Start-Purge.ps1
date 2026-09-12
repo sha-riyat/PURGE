@@ -1,4 +1,4 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param(
     [string]$OutputDirectory = (Join-Path $PSScriptRoot '..\output'),
     [switch]$CheckOnly
@@ -206,5 +206,7 @@ Write-Host '  3. Modifier les paramètres, puis activer le nettoyage des donnée
 Write-Host '  4. Confirmer la réinitialisation'
 Write-Host ''
 Write-Host 'Windows redémarrera automatiquement après la confirmation finale.' -ForegroundColor Yellow
-Start-Process 'ms-settings:recovery'
+# Use Explorer to open the URI explicitly. This avoids a Windows PowerShell
+# 5.1 parser/runtime edge case with the URI passed as a positional argument.
+Start-Process -FilePath "explorer.exe" -ArgumentList "ms-settings:recovery"
 exit 0
