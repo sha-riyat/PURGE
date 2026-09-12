@@ -13,6 +13,29 @@ function Test-IsAdministrator {
     return $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 }
 
+function Convert-WinReOutputToStatus {
+    param([AllowNull()][string]$Text)
+
+    if ([string]::IsNullOrWhiteSpace($Text)) {
+        return 'UNKNOWN'
+    }
+
+    # reagentc localises the label and status, so compare an accent-free copy
+    # and keep the match scoped to the Windows RE status line.
+    $normalized = $Text.Normalize([Text.NormalizationForm]::FormD) -replace '\p{Mn}', ''
+    $statusLine = @($normalized -split '\r?\n' | Where-Object {
+        $_ -match '(?i)\bWindows\s+RE\b' -and $_ -match ':'
+    }) -join "`n"
+
+    if ($statusLine -match '(?i):\s*Enabled\b|:\s*Activ\w*\b') {
+        return 'ENABLED'
+    }
+    if ($statusLine -match '(?i):\s*Disabled\b|:\s*Desactiv\w*\b') {
+        return 'DISABLED'
+    }
+    return 'UNKNOWN'
+}
+
 function Get-WinReStatus {
     $reagentc = Join-Path $env:SystemRoot 'System32\reagentc.exe'
     if (-not (Test-Path -LiteralPath $reagentc)) {
@@ -20,13 +43,7 @@ function Get-WinReStatus {
     }
 
     $text = (& $reagentc /info 2>&1 | Out-String)
-    if ($text -match '(?im)(Windows RE status|Statut de Windows RE|Etat de Windows RE|État de Windows RE)\s*:\s*(Enabled|Activ)') {
-        return 'ENABLED'
-    }
-    if ($text -match '(?im)(Windows RE status|Statut de Windows RE|Etat de Windows RE|État de Windows RE)\s*:\s*(Disabled|Desactiv|Désactiv)') {
-        return 'DISABLED'
-    }
-    return 'UNKNOWN'
+    return Convert-WinReOutputToStatus -Text $text
 }
 
 function Get-DiskPreflight {
