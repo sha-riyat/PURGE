@@ -24,7 +24,7 @@ function Convert-WinReOutputToStatus {
     # and keep the match scoped to the Windows RE status line.
     $normalized = $Text.Normalize([Text.NormalizationForm]::FormD) -replace '\p{Mn}', ''
     $statusLine = @($normalized -split '\r?\n' | Where-Object {
-        $_ -match '(?i)\bWindows\s+RE\b' -and $_ -match ':'
+        $_ -match '(?i)\bWindows\s+RE\b|\bWinRE\b|recuperation\s+Windows' -and $_ -match ':'
     }) -join "`n"
 
     if ($statusLine -match '(?i):\s*Enabled\b|:\s*Activ\w*\b') {
