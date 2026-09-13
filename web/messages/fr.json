@@ -38,7 +38,7 @@
     "stepConfirm": "Confirmer",
     "stepConfirmText": "Dans la fenêtre, écrivez exactement NETTOYER TOUS LES DISQUES.",
     "stepReset": "Réinitialiser",
-    "stepResetText": "Dans Windows, choisissez Supprimer tout, Tous les lecteurs et Nettoyer complètement le lecteur.",
+    "stepResetText": "Dans Windows, choisissez Supprimer tout, puis Tous les lecteurs s’il y a plusieurs disques, et Nettoyer complètement le lecteur.",
     "consoleLabel": "Exemple de commande et d’écran Windows",
     "checking": "Vérification...",
     "admin": "Droits admin",
@@ -49,7 +49,7 @@
     "removeEverything": "Supprimer tout",
     "allDrives": "Tous les lecteurs internes",
     "scope": "Tous les volumes internes accessibles",
-    "cleanData": "Activez Nettoyage des données et sélectionnez Tous les lecteurs si Windows le propose. Ce nettoyage Windows est grand public, pas une preuve forensic.",
+    "cleanData": "Activez Nettoyage des données. S’il y a plusieurs disques, sélectionnez Tous les lecteurs. Ce nettoyage Windows est grand public, pas une preuve forensic.",
     "externalMedia": "Retirez les supports USB avant de lancer."
   },
   "After": {

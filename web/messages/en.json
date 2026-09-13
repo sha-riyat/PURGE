@@ -38,7 +38,7 @@
     "stepConfirm": "Confirm",
     "stepConfirmText": "In the window, type exactly NETTOYER TOUS LES DISQUES.",
     "stepReset": "Reset",
-    "stepResetText": "In Windows, choose Remove everything, All drives and Fully clean the drive.",
+    "stepResetText": "In Windows, choose Remove everything, then All drives when multiple drives are present, and Fully clean the drive.",
     "consoleLabel": "Example command and Windows screen",
     "checking": "Checking...",
     "admin": "Admin rights",
@@ -49,7 +49,7 @@
     "removeEverything": "Remove everything",
     "allDrives": "All internal drives",
     "scope": "All accessible internal volumes",
-    "cleanData": "Enable Clean data and select All drives if Windows offers it. Windows consumer cleaning is not forensic proof.",
+    "cleanData": "Enable Clean data. When multiple drives are present, select All drives. Windows consumer cleaning is not forensic proof.",
     "externalMedia": "Remove USB media before starting."
   },
   "After": {

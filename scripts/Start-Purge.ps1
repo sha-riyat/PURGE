@@ -146,7 +146,7 @@ function Write-Report {
         Policy = [pscustomobject]@{
             UserFlow = 'Windows Reset / Remove everything / All drives / Fully clean the drive'
             TargetScope = 'ALL_INTERNAL_USER_ACCESSIBLE_VOLUMES'
-            RequireAllDrivesSelection = $true
+            RequireAllDrivesSelection = (@($Preflight.Disks.InternalDisks).Count -gt 1)
             RequireCleanDataSelection = $true
             ExternalMedia = 'BLOCKED_FOR_REVIEW'
             NoCustomIso = $true
@@ -169,6 +169,7 @@ $preflight = [pscustomobject]@{
     IsAdministrator = Test-IsAdministrator
     WinRE = Get-WinReStatus
     Disks = $diskPreflight
+    RequireAllDrivesSelection = (@($diskPreflight.InternalDisks).Count -gt 1)
 }
 
 Write-Host ''
@@ -252,7 +253,11 @@ if ($confirmation -cne $confirmationPhrase) {
     exit 2
 }
 
-$reportPath = Write-Report -Status 'RESET_PENDING' -Preflight $preflight -Reason 'Precontrole valide et confirmation de tous les disques recue.' -NextStep 'Dans Windows Reset, choisir Remove everything, All drives, puis Clean data/Fully clean the drive.'
+$resetNextStep = 'Dans Windows Reset, choisir Remove everything, puis Clean data/Fully clean the drive.'
+if ($preflight.RequireAllDrivesSelection) {
+    $resetNextStep = 'Dans Windows Reset, choisir Remove everything, All drives, puis Clean data/Fully clean the drive.'
+}
+$reportPath = Write-Report -Status 'RESET_PENDING' -Preflight $preflight -Reason 'Precontrole valide et confirmation de tous les disques recue.' -NextStep $resetNextStep
 Write-Host ''
 Write-Host 'Précontrôle validé.' -ForegroundColor Green
 Write-Host "Journal écrit : $reportPath"
@@ -261,10 +266,16 @@ Write-Host 'Dans la fenetre Windows qui va s''ouvrir, choisir :' -ForegroundColo
 Write-Host '  1. Réinitialiser ce PC'
 Write-Host '  2. Supprimer tout'
 Write-Host '  3. Modifier les paramètres'
-Write-Host '  4. Supprimer les fichiers de tous les lecteurs / Tous les lecteurs'
-Write-Host '  5. Nettoyage des données : Oui / Nettoyer complètement le lecteur'
-Write-Host '  6. Si l''option Tous les lecteurs n''est pas proposée, annuler et ne pas continuer'
-Write-Host '  7. Confirmer la réinitialisation'
+if ($preflight.RequireAllDrivesSelection) {
+    Write-Host '  4. Supprimer les fichiers de tous les lecteurs / Tous les lecteurs'
+    Write-Host '  5. Nettoyage des données : Oui / Nettoyer complètement le lecteur'
+    Write-Host '  6. Si l''option Tous les lecteurs n''est pas proposée, annuler et ne pas continuer'
+    Write-Host '  7. Confirmer la réinitialisation'
+} else {
+    Write-Host '  4. Nettoyage des données : Oui / Nettoyer complètement le lecteur'
+    Write-Host '  5. Un seul disque interne est détecté : l''option Tous les lecteurs peut être absente.'
+    Write-Host '  6. Confirmer la réinitialisation'
+}
 Write-Host ''
 Write-Host 'Windows redémarrera automatiquement après la confirmation finale.' -ForegroundColor Yellow
 # Use Explorer to open the URI explicitly. This avoids a Windows PowerShell

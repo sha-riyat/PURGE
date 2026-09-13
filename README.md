@@ -58,11 +58,13 @@ supplémentaire n’a aucun volume accessible, ou si son identité matérielle e
 le parcours est bloqué : la réinitialisation Windows ne peut alors pas garantir que ce disque
 est couvert.
 
-Quand plusieurs volumes internes accessibles sont présents, l’opérateur doit sélectionner
-explicitement `Supprimer les fichiers de tous les lecteurs` / `Tous les lecteurs` dans les
-paramètres de réinitialisation. Il doit aussi activer `Nettoyage des données` / `Nettoyer
-complètement le lecteur`. Si Windows ne propose pas l’option `Tous les lecteurs`, il faut
-annuler et ne pas poursuivre.
+Quand plusieurs disques internes sont présents, l’opérateur doit sélectionner explicitement
+`Supprimer les fichiers de tous les lecteurs` / `Tous les lecteurs` dans les paramètres de
+réinitialisation. Il doit aussi activer `Nettoyage des données` / `Nettoyer complètement le
+lecteur`. Si un seul disque interne est détecté, l’option `Tous les lecteurs` peut être
+absente : le nettoyage complet du lecteur Windows reste alors l’option attendue. Si plusieurs
+disques sont détectés mais que `Tous les lecteurs` n’est pas proposé, il faut annuler et ne pas
+poursuivre.
 
 Les supports USB restent bloqués et ne sont jamais considérés comme des cibles de ce parcours.
 
