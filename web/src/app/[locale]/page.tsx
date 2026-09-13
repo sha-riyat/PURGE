@@ -139,14 +139,17 @@ export default function Home() {
                 <p className="terminal-muted">{t("Use.checking")}</p>
                 <p><span className="console-status">OK</span> Windows 11 · 64 bits</p>
                 <p><span className="console-status">OK</span> {t("Use.admin")}</p>
-                <p><span className="console-action">{t("Use.action")}</span> {t("Use.type")} <b>NETTOYER</b></p>
+                <p><span className="console-status">OK</span> {t("Use.scope")}</p>
+                <p><span className="console-action">{t("Use.action")}</span> {t("Use.type")} <b>NETTOYER TOUS LES DISQUES</b></p>
               </div>
             </div>
             <div className="console-block recovery-block">
               <span className="console-label">{t("Use.recovery")}</span>
               <p className="recovery-line">{t("Use.resetThisPc")} <span>›</span></p>
               <p className="recovery-line">{t("Use.removeEverything")} <span>›</span></p>
+              <p className="recovery-line">{t("Use.allDrives")} <span>›</span></p>
               <p className="recovery-note">{t("Use.cleanData")}</p>
+              <p className="recovery-note">{t("Use.externalMedia")}</p>
             </div>
           </div>
         </div>

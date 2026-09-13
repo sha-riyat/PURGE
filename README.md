@@ -18,9 +18,9 @@ Le programme :
 3. vérifie que Windows RE est disponible ;
 4. inventorie les disques présents sans lire les fichiers utilisateurs ;
 5. bloque si un support USB externe est connecté ou si le disque système n’est pas identifié de manière unique ;
-6. demande la confirmation exacte `NETTOYER` ;
+6. demande la confirmation exacte `NETTOYER TOUS LES DISQUES` ;
 7. ouvre le parcours officiel `Réinitialiser ce PC` ;
-8. guide l’opérateur vers `Supprimer tout` et le nettoyage des données lorsqu’il est proposé ;
+8. guide l’opérateur vers `Supprimer tout`, `Tous les lecteurs` et `Nettoyer complètement le lecteur` ;
 9. laisse Windows redémarrer et terminer la réinitialisation ;
 10. laisse la machine sur l’écran de première configuration, sans créer de compte.
 
@@ -51,10 +51,27 @@ Set-Location 'C:\Users\shariyat\work\personal\PURGE'
 
 Cette commande ne modifie aucun disque et écrit seulement un rapport de précontrôle.
 
+## Plusieurs disques internes
+
+PURGE inventorie chaque disque interne avant le lancement. Si un disque interne
+supplémentaire n’a aucun volume accessible, ou si son identité matérielle est incomplète,
+le parcours est bloqué : la réinitialisation Windows ne peut alors pas garantir que ce disque
+est couvert.
+
+Quand plusieurs volumes internes accessibles sont présents, l’opérateur doit sélectionner
+explicitement `Supprimer les fichiers de tous les lecteurs` / `Tous les lecteurs` dans les
+paramètres de réinitialisation. Il doit aussi activer `Nettoyage des données` / `Nettoyer
+complètement le lecteur`. Si Windows ne propose pas l’option `Tous les lecteurs`, il faut
+annuler et ne pas poursuivre.
+
+Les supports USB restent bloqués et ne sont jamais considérés comme des cibles de ce parcours.
+
 ## Limites
 
 Cette version utilise le parcours Windows intégré et ne prétend pas fournir une preuve
-forensic universelle pour tous les types de SSD/NVMe. Elle ne contourne pas UAC, BitLocker,
+forensic universelle pour tous les types de SSD/NVMe. Le nettoyage Windows est un parcours
+grand public : il ne constitue pas une preuve d’effacement conforme à une norme gouvernementale
+ou industrielle. Elle ne contourne pas UAC, BitLocker,
 les politiques d’entreprise ou les restrictions de récupération. Si Windows RE est absent,
 si un disque est ambigu ou si un support externe est connecté, le résultat est `BLOCKED`.
 

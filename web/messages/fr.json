@@ -1,7 +1,7 @@
 {
   "Metadata": {
     "title": "PURGE — Réinitialiser un PC Windows",
-    "description": "Le parcours Windows court, guidé et lisible pour nettoyer un ordinateur et revenir à l’écran de première configuration."
+    "description": "Le parcours Windows guidé pour identifier les disques internes, tout effacer et revenir à l’écran de première configuration."
   },
   "Navigation": {
     "primary": "Navigation principale",
@@ -15,7 +15,7 @@
   "Hero": {
     "titleLine1": "Nettoyez un PC Windows.",
     "titleLine2": "Remettez-le à zéro.",
-    "lede": "Un parcours court pour vérifier, confirmer et réinitialiser Windows.",
+    "lede": "Un parcours vérifié pour identifier tous les disques internes, confirmer puis réinitialiser Windows.",
     "download": "Télécharger PURGE",
     "steps": "Voir les étapes",
     "preview": "Aperçu du parcours PURGE",
@@ -30,15 +30,15 @@
   "Use": {
     "titleLine1": "Lancer PURGE.",
     "titleLine2": "Réinitialiser Windows.",
-    "summary": "Les quatre actions à faire, dans l’ordre.",
+    "summary": "Les quatre actions à faire pour couvrir tous les lecteurs internes.",
     "stepDownload": "Télécharger",
     "stepDownloadText": "Téléchargez le paquet et extrayez-le dans un dossier.",
     "stepLaunch": "Lancer",
     "stepLaunchText": "Ouvrez Purge.cmd, puis acceptez la demande UAC.",
     "stepConfirm": "Confirmer",
-    "stepConfirmText": "Dans la fenêtre, écrivez exactement NETTOYER.",
+    "stepConfirmText": "Dans la fenêtre, écrivez exactement NETTOYER TOUS LES DISQUES.",
     "stepReset": "Réinitialiser",
-    "stepResetText": "Dans Windows, choisissez Réinitialiser ce PC puis Supprimer tout.",
+    "stepResetText": "Dans Windows, choisissez Supprimer tout, Tous les lecteurs et Nettoyer complètement le lecteur.",
     "consoleLabel": "Exemple de commande et d’écran Windows",
     "checking": "Vérification...",
     "admin": "Droits admin",
@@ -47,12 +47,15 @@
     "recovery": "WINDOWS / RÉCUPÉRATION",
     "resetThisPc": "Réinitialiser ce PC",
     "removeEverything": "Supprimer tout",
-    "cleanData": "Activez le nettoyage des données si Windows le propose."
+    "allDrives": "Tous les lecteurs internes",
+    "scope": "Tous les volumes internes accessibles",
+    "cleanData": "Activez Nettoyage des données et sélectionnez Tous les lecteurs si Windows le propose. Ce nettoyage Windows est grand public, pas une preuve forensic.",
+    "externalMedia": "Retirez les supports USB avant de lancer."
   },
   "After": {
     "titleLine1": "Ce qui se passe",
     "titleLine2": "après.",
-    "summary": "PURGE s’arrête avant la configuration du prochain utilisateur.",
+    "summary": "PURGE couvre les lecteurs internes puis s’arrête avant la configuration du prochain utilisateur.",
     "resetPending": "La confirmation est reçue. Windows ouvre Récupération.",
     "restart": "Windows applique la remise à zéro et redémarre automatiquement.",
     "initialScreen": "L’ordinateur revient à la première configuration Windows."

@@ -16,6 +16,10 @@ Scénarios :
 7. journal inaccessible ;
 8. simulation répétée : aucun secteur ne doit être modifié.
 
+Pour le scénario avec un disque de données, le test doit aussi vérifier que le parcours
+demande `NETTOYER TOUS LES DISQUES`, guide vers `Tous les lecteurs` et bloque si un disque
+interne n’a aucun volume accessible.
+
 ## Matrice physique minimale
 
 - un HDD SATA de laboratoire ;

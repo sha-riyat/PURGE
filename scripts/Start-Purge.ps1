@@ -77,12 +77,36 @@ function Get-DiskPreflight {
         }
     })
 
+    $internalDisks = @($disks | Where-Object { -not $_.IsUsb })
+    $bootDisks = @($disks | Where-Object { $_.HasBootVolume })
+    $nonBootInternalDisks = @($internalDisks | Where-Object { -not $_.HasBootVolume })
+    $userAccessibleVolumes = @($internalDisks | ForEach-Object {
+        $disk = $_
+        @($disk.Volumes | Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_) } | ForEach-Object {
+            [pscustomobject]@{
+                DiskIndex = $disk.Index
+                DeviceID = [string]$_
+            }
+        })
+    })
+    $disksWithoutUserAccessibleVolume = @($nonBootInternalDisks | Where-Object {
+        @($_.Volumes | Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_) }).Count -eq 0
+    })
+    $disksWithIncompleteIdentity = @($internalDisks | Where-Object {
+        [string]::IsNullOrWhiteSpace([string]$_.Model) -or
+        [string]::IsNullOrWhiteSpace([string]$_.SerialNumber)
+    })
+
     return [pscustomobject]@{
         SystemDrive = $systemDrive
         Disks = $disks
-        InternalDisks = @($disks | Where-Object { -not $_.IsUsb })
+        InternalDisks = $internalDisks
         UsbDisks = @($disks | Where-Object { $_.IsUsb })
-        BootDisks = @($disks | Where-Object { $_.HasBootVolume })
+        BootDisks = $bootDisks
+        NonBootInternalDisks = $nonBootInternalDisks
+        UserAccessibleVolumes = $userAccessibleVolumes
+        DisksWithoutUserAccessibleVolume = $disksWithoutUserAccessibleVolume
+        DisksWithIncompleteIdentity = $disksWithIncompleteIdentity
     }
 }
 
@@ -115,10 +139,15 @@ function Write-Report {
         Storage = [pscustomobject]@{
             SystemDrive = [string]$Preflight.Disks.SystemDrive
             DiskCount = @($Preflight.Disks.Disks).Count
+            InternalDiskCount = @($Preflight.Disks.InternalDisks).Count
+            UserAccessibleVolumeCount = @($Preflight.Disks.UserAccessibleVolumes).Count
             Disks = @($Preflight.Disks.Disks)
         }
         Policy = [pscustomobject]@{
-            UserFlow = 'Windows Reset / Remove everything / Clean data when offered'
+            UserFlow = 'Windows Reset / Remove everything / All drives / Fully clean the drive'
+            TargetScope = 'ALL_INTERNAL_USER_ACCESSIBLE_VOLUMES'
+            RequireAllDrivesSelection = $true
+            RequireCleanDataSelection = $true
             ExternalMedia = 'BLOCKED_FOR_REVIEW'
             NoCustomIso = $true
             NoAutomaticAccountCreation = $true
@@ -149,7 +178,7 @@ Write-Host '=============================================' -ForegroundColor Cyan
 Write-Host ("{0} | Build {1} | {2}" -f $preflight.Os.Caption, $preflight.Os.Build, $preflight.Os.Architecture)
 Write-Host ("Administrateur : {0} | WinRE : {1}" -f $preflight.IsAdministrator, $preflight.WinRE)
 Write-Host ''
-Write-Host 'Le parcours va supprimer les comptes, applications, paramètres et données précédents.' -ForegroundColor Yellow
+Write-Host 'Le parcours vise tous les lecteurs internes : comptes, applications, paramètres et données précédents.' -ForegroundColor Yellow
 Write-Host 'Windows redemarrera ensuite et affichera l''ecran de premiere configuration.' -ForegroundColor Yellow
 Write-Host ''
 
@@ -167,6 +196,8 @@ $blockReason = $null
 $bootDiskCount = ($diskPreflight.BootDisks | Measure-Object).Count
 $usbDiskCount = ($diskPreflight.UsbDisks | Measure-Object).Count
 $internalDiskCount = ($diskPreflight.InternalDisks | Measure-Object).Count
+$uncoveredDiskCount = ($diskPreflight.DisksWithoutUserAccessibleVolume | Measure-Object).Count
+$incompleteIdentityCount = ($diskPreflight.DisksWithIncompleteIdentity | Measure-Object).Count
 if (-not $preflight.IsAdministrator) {
     $blockReason = 'Une élévation administrateur est requise.'
 } else {
@@ -181,6 +212,14 @@ if (-not $preflight.IsAdministrator) {
             } else {
                 if ($internalDiskCount -lt 1) {
                     $blockReason = 'Aucun disque interne n''a ete identifie.'
+                } else {
+                    if ($uncoveredDiskCount -gt 0) {
+                        $blockReason = 'Un disque interne ne possede aucun volume accessible. Le parcours Windows ne peut pas garantir sa couverture.'
+                    } else {
+                        if ($incompleteIdentityCount -gt 0) {
+                            $blockReason = 'L''identite materielle d''un disque interne est incomplete. Impossible de confirmer toutes les cibles.'
+                        }
+                    }
                 }
             }
         }
@@ -203,15 +242,17 @@ if ($CheckOnly) {
     exit 0
 }
 
-Write-Host 'Cette opération est irréversible pour les données présentes dans le profil Windows.' -ForegroundColor Red
-$confirmation = (Read-Host 'Saisir NETTOYER pour ouvrir le parcours de réinitialisation').Trim().ToUpperInvariant()
-if ($confirmation -cne 'NETTOYER') {
-    $reportPath = Write-Report -Status 'CANCELLED' -Preflight $preflight -Reason 'La confirmation exacte NETTOYER n''a pas ete saisie.' -NextStep 'Aucune action destructive n''a ete lancee.'
+Write-Host 'Cette opération est irréversible pour les données présentes dans les lecteurs internes.' -ForegroundColor Red
+$confirmationPhrase = 'NETTOYER TOUS LES DISQUES'
+Write-Host 'La réinitialisation doit viser tous les lecteurs internes, pas seulement le lecteur Windows.' -ForegroundColor Red
+$confirmation = (Read-Host ("Saisir {0} pour ouvrir le parcours de réinitialisation" -f $confirmationPhrase)).Trim().ToUpperInvariant()
+if ($confirmation -cne $confirmationPhrase) {
+    $reportPath = Write-Report -Status 'CANCELLED' -Preflight $preflight -Reason ("La confirmation exacte {0} n''a pas ete saisie." -f $confirmationPhrase) -NextStep 'Aucune action destructive n''a ete lancee.'
     Write-Host "Annulé. Rapport : $reportPath"
     exit 2
 }
 
-$reportPath = Write-Report -Status 'RESET_PENDING' -Preflight $preflight -Reason 'Precontrole valide et confirmation recue.' -NextStep 'Dans Windows Reset, choisir Remove everything puis Clean data/Fully clean the drive si propose.'
+$reportPath = Write-Report -Status 'RESET_PENDING' -Preflight $preflight -Reason 'Precontrole valide et confirmation de tous les disques recue.' -NextStep 'Dans Windows Reset, choisir Remove everything, All drives, puis Clean data/Fully clean the drive.'
 Write-Host ''
 Write-Host 'Précontrôle validé.' -ForegroundColor Green
 Write-Host "Journal écrit : $reportPath"
@@ -219,8 +260,11 @@ Write-Host ''
 Write-Host 'Dans la fenetre Windows qui va s''ouvrir, choisir :' -ForegroundColor Cyan
 Write-Host '  1. Réinitialiser ce PC'
 Write-Host '  2. Supprimer tout'
-Write-Host '  3. Modifier les paramètres, puis activer le nettoyage des données si proposé'
-Write-Host '  4. Confirmer la réinitialisation'
+Write-Host '  3. Modifier les paramètres'
+Write-Host '  4. Supprimer les fichiers de tous les lecteurs / Tous les lecteurs'
+Write-Host '  5. Nettoyage des données : Oui / Nettoyer complètement le lecteur'
+Write-Host '  6. Si l''option Tous les lecteurs n''est pas proposée, annuler et ne pas continuer'
+Write-Host '  7. Confirmer la réinitialisation'
 Write-Host ''
 Write-Host 'Windows redémarrera automatiquement après la confirmation finale.' -ForegroundColor Yellow
 # Use Explorer to open the URI explicitly. This avoids a Windows PowerShell

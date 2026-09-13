@@ -1,7 +1,7 @@
 {
   "Metadata": {
     "title": "PURGE — Reset a Windows PC",
-    "description": "A short, guided and readable Windows journey to clean up a computer and return it to the first-time setup screen."
+    "description": "A guided Windows journey to identify internal drives, erase everything and return to the first-time setup screen."
   },
   "Navigation": {
     "primary": "Main navigation",
@@ -15,7 +15,7 @@
   "Hero": {
     "titleLine1": "Clean a Windows PC.",
     "titleLine2": "Reset it.",
-    "lede": "A short journey to check, confirm and reset Windows.",
+    "lede": "A verified journey to identify every internal drive, confirm the scope and reset Windows.",
     "download": "Download PURGE",
     "steps": "See the steps",
     "preview": "PURGE journey preview",
@@ -30,15 +30,15 @@
   "Use": {
     "titleLine1": "Run PURGE.",
     "titleLine2": "Reset Windows.",
-    "summary": "Four actions to take, in order.",
+    "summary": "Four actions to cover every internal drive.",
     "stepDownload": "Download",
     "stepDownloadText": "Download the package and extract it to a folder.",
     "stepLaunch": "Launch",
     "stepLaunchText": "Open Purge.cmd, then accept the UAC prompt.",
     "stepConfirm": "Confirm",
-    "stepConfirmText": "In the window, type exactly NETTOYER.",
+    "stepConfirmText": "In the window, type exactly NETTOYER TOUS LES DISQUES.",
     "stepReset": "Reset",
-    "stepResetText": "In Windows, choose Reset this PC, then Remove everything.",
+    "stepResetText": "In Windows, choose Remove everything, All drives and Fully clean the drive.",
     "consoleLabel": "Example command and Windows screen",
     "checking": "Checking...",
     "admin": "Admin rights",
@@ -47,12 +47,15 @@
     "recovery": "WINDOWS / RECOVERY",
     "resetThisPc": "Reset this PC",
     "removeEverything": "Remove everything",
-    "cleanData": "Enable data cleaning if Windows offers it."
+    "allDrives": "All internal drives",
+    "scope": "All accessible internal volumes",
+    "cleanData": "Enable Clean data and select All drives if Windows offers it. Windows consumer cleaning is not forensic proof.",
+    "externalMedia": "Remove USB media before starting."
   },
   "After": {
     "titleLine1": "What happens",
     "titleLine2": "after.",
-    "summary": "PURGE stops before the next user’s setup.",
+    "summary": "PURGE covers the internal drives, then stops before the next user’s setup.",
     "resetPending": "Confirmation received. Windows opens Recovery.",
     "restart": "Windows applies the reset and restarts automatically.",
     "initialScreen": "The computer returns to the first Windows setup."
