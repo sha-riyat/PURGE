@@ -60,6 +60,7 @@ export default function Home() {
         <Logo label={t("Navigation.home")} />
         <nav className="desktop-nav" aria-label={t("Navigation.primary")}>
           <a href="#utiliser">{t("Navigation.use")}</a>
+          <a href="#demo">{t("Navigation.demo")}</a>
           <a href="#apres">{t("Navigation.after")}</a>
           <a href="#telecharger">{t("Navigation.download")}</a>
         </nav>
@@ -153,6 +154,38 @@ export default function Home() {
             </div>
           </div>
         </div>
+      </section>
+
+      <section id="demo" className="section demo-section container-wide" aria-labelledby="demo-title">
+        <div className="section-heading">
+          <div>
+            <p className="section-kicker">{t("Demo.label")}</p>
+            <h2 id="demo-title">{t("Demo.titleLine1")}<br /><em>{t("Demo.titleLine2")}</em></h2>
+          </div>
+          <p>{t("Demo.summary")}</p>
+        </div>
+
+        <figure className="demo-media">
+          <div className="demo-media-bar">
+            <span className="terminal-circles"><i /><i /><i /></span>
+            <span>{t("Demo.videoTitle")}</span>
+            <span className="demo-media-status">AUTOPLAY · MUTED</span>
+          </div>
+          <video
+            className="demo-video"
+            autoPlay
+            muted
+            loop
+            playsInline
+            controls
+            preload="metadata"
+            poster="/videos/purge-tuto-poster.jpg"
+          >
+            <source src="/videos/purge-tuto.mp4" type="video/mp4" />
+            {t("Demo.fallback")}
+          </video>
+          <figcaption>{t("Demo.autoplay")}</figcaption>
+        </figure>
       </section>
 
       <section id="apres" className="section section-dark after-section" aria-labelledby="after-title">

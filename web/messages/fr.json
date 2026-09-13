@@ -7,6 +7,7 @@
     "primary": "Navigation principale",
     "home": "PURGE, accueil",
     "use": "Utiliser",
+    "demo": "Démo",
     "after": "Après",
     "download": "Télécharger",
     "start": "Commencer",
@@ -51,6 +52,15 @@
     "scope": "Tous les volumes internes accessibles",
     "cleanData": "Activez Nettoyage des données. S’il y a plusieurs disques, sélectionnez Tous les lecteurs. Ce nettoyage Windows est grand public, pas une preuve forensic.",
     "externalMedia": "Retirez les supports USB avant de lancer."
+  },
+  "Demo": {
+    "label": "DÉMONSTRATION PURGE",
+    "titleLine1": "Voir PURGE.",
+    "titleLine2": "Du téléchargement au premier écran.",
+    "summary": "Une démonstration complète du téléchargement, du lancement, du précontrôle et de la réinitialisation Windows.",
+    "videoTitle": "Démonstration vidéo de PURGE",
+    "autoplay": "La vidéo démarre automatiquement, sans son. Utilisez les contrôles pour mettre en pause, reprendre ou relancer la démonstration.",
+    "fallback": "Votre navigateur ne peut pas lire cette vidéo."
   },
   "After": {
     "titleLine1": "Ce qui se passe",
