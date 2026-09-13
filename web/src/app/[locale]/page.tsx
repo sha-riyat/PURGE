@@ -166,6 +166,9 @@ export default function Home() {
         </div>
 
         <figure className="demo-media">
+          <div className="demo-media-bar" aria-hidden="true">
+            <span className="terminal-circles"><i /><i /><i /></span>
+          </div>
           <video
             className="demo-video"
             autoPlay
