@@ -58,8 +58,6 @@
     "titleLine1": "Voir PURGE.",
     "titleLine2": "Du téléchargement au premier écran.",
     "summary": "Une démonstration complète du téléchargement, du lancement, du précontrôle et de la réinitialisation Windows.",
-    "videoTitle": "Démonstration vidéo de PURGE",
-    "autoplay": "La vidéo démarre automatiquement, sans son. Utilisez les contrôles pour mettre en pause, reprendre ou relancer la démonstration.",
     "fallback": "Votre navigateur ne peut pas lire cette vidéo."
   },
   "After": {

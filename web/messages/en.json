@@ -58,8 +58,6 @@
     "titleLine1": "See PURGE.",
     "titleLine2": "From download to first setup.",
     "summary": "A complete demonstration of downloading, launching, checking and resetting Windows.",
-    "videoTitle": "PURGE video demonstration",
-    "autoplay": "The video starts automatically without sound. Use the controls to pause, resume or replay the demonstration.",
     "fallback": "Your browser cannot play this video."
   },
   "After": {

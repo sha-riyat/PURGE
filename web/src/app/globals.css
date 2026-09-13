@@ -109,9 +109,6 @@ body { background: #090909; color: #f2f2f0; }
 .state-card p { margin-top: 9px; color: #aaaaaa; font-size: 13px; line-height: 1.5; }
 .demo-section { padding-top: 42px; }
 .demo-media { margin: 0; overflow: hidden; border: 1px solid #303030; border-radius: 12px; background: #111111; box-shadow: 0 24px 50px rgba(0,0,0,.22); }
-.demo-media-bar { display: flex; align-items: center; gap: 13px; min-height: 48px; padding: 0 17px; border-bottom: 1px solid #2d2d2d; color: #999999; font-family: var(--font-mono); font-size: 10px; letter-spacing: .08em; }
-.demo-media-status { margin-left: auto; color: #777777; font-size: 9px; }
 .demo-video { display: block; width: 100%; height: auto; max-height: min(72vh, 760px); background: #050505; object-fit: contain; }
-.demo-media figcaption { padding: 17px 20px 20px; color: #aaaaaa; font-size: 14px; line-height: 1.55; }
 @media (max-width: 960px) { .use-layout { grid-template-columns: 1fr; gap: 52px; }.state-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 640px) { .use-layout { gap: 40px; }.use-step { grid-template-columns: 34px 1fr; }.use-step-title h3 { font-size: 15px; }.operator-console { border-radius: 10px; }.console-block { padding: 21px 17px; }.console-body { overflow-x: auto; }.state-grid { grid-template-columns: 1fr; }.state-card { min-height: 145px; }.state-card strong { margin-top: 32px; }.demo-section { padding-top: 20px; }.demo-media { border-radius: 10px; }.demo-media-bar { min-height: 44px; padding: 0 13px; gap: 9px; font-size: 9px; }.demo-media-status { display: none; }.demo-media figcaption { padding: 14px 15px 17px; font-size: 14px; }.demo-video { max-height: none; } }
+@media (max-width: 640px) { .use-layout { gap: 40px; }.use-step { grid-template-columns: 34px 1fr; }.use-step-title h3 { font-size: 15px; }.operator-console { border-radius: 10px; }.console-block { padding: 21px 17px; }.console-body { overflow-x: auto; }.state-grid { grid-template-columns: 1fr; }.state-card { min-height: 145px; }.state-card strong { margin-top: 32px; }.demo-section { padding-top: 20px; }.demo-media { border-radius: 10px; }.demo-video { max-height: none; } }

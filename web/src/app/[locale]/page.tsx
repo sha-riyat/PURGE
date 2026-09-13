@@ -166,11 +166,6 @@ export default function Home() {
         </div>
 
         <figure className="demo-media">
-          <div className="demo-media-bar">
-            <span className="terminal-circles"><i /><i /><i /></span>
-            <span>{t("Demo.videoTitle")}</span>
-            <span className="demo-media-status">AUTOPLAY · MUTED</span>
-          </div>
           <video
             className="demo-video"
             autoPlay
@@ -184,7 +179,6 @@ export default function Home() {
             <source src="/videos/purge-tuto.mp4" type="video/mp4" />
             {t("Demo.fallback")}
           </video>
-          <figcaption>{t("Demo.autoplay")}</figcaption>
         </figure>
       </section>
 
