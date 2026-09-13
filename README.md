@@ -11,6 +11,11 @@ Depuis le dossier du projet ou une clé de maintenance, lancer :
 Purge.cmd
 ```
 
+Le lanceur transmet le code de sortie du précontrôle et du parcours Windows. Un code `0`
+indique que le parcours a été ouvert ou terminé sans erreur ; `2` indique une annulation de
+la confirmation ; `10` indique un blocage de sécurité. Un autre code indique une erreur de
+lancement et doit être conservé avec le message affiché dans la console.
+
 Le programme :
 
 1. vérifie l’édition et l’architecture de Windows ;
