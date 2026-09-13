@@ -1,11 +1,15 @@
 ﻿[CmdletBinding()]
 param(
-    [string]$OutputDirectory = (Join-Path $PSScriptRoot '..\output'),
+    [string]$OutputDirectory,
     [switch]$CheckOnly
 )
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
+
+if ([string]::IsNullOrWhiteSpace($OutputDirectory)) {
+    $OutputDirectory = Join-Path -Path $PSScriptRoot -ChildPath '..\output'
+}
 
 function Test-IsAdministrator {
     $identity = [Security.Principal.WindowsIdentity]::GetCurrent()
@@ -42,7 +46,20 @@ function Get-WinReStatus {
         return 'UNAVAILABLE'
     }
 
-    $text = (& $reagentc /info 2>&1 | Out-String)
+    $previousErrorActionPreference = $ErrorActionPreference
+    $ErrorActionPreference = 'Continue'
+    try {
+        $text = (& $reagentc /info 2>&1 | Out-String)
+    } catch {
+        return 'UNKNOWN'
+    } finally {
+        $ErrorActionPreference = $previousErrorActionPreference
+    }
+
+    if ($LASTEXITCODE -ne 0) {
+        return 'UNKNOWN'
+    }
+
     return Convert-WinReOutputToStatus -Text $text
 }
 
