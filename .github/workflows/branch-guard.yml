@@ -1,0 +1,21 @@
+name: Branch guard
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, edited, reopened, synchronize]
+
+permissions:
+  contents: read
+
+jobs:
+  guard-base-branch:
+    name: Guard base branch
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require staging as the source branch for main
+        run: |
+          if [ "${{ github.head_ref }}" != "staging" ]; then
+            echo "::error::Pull requests into 'main' are only allowed from 'staging' (got '${{ github.head_ref }}')."
+            exit 1
+          fi
